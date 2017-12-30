@@ -39,9 +39,8 @@ public class SearchActivity extends AppCompatActivity {
         Global.busnum = Busnumber.getText().toString();
         FindfromView findfromView = new FindfromView(SearchActivity.this);
         findfromView.findLoc();
-        Intent intent = new Intent(SearchActivity.this, Track.class);
-        SearchActivity.this.startActivity(intent);
-
+            Intent intent = new Intent(SearchActivity.this, Track.class);
+            SearchActivity.this.startActivity(intent);
+        }
 
     }
-}

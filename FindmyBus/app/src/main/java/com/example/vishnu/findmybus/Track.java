@@ -51,7 +51,10 @@ public class Track extends FragmentActivity implements OnMapReadyCallback {
         // Add a marker in Sydney and move the camera
         LatLng kerala = new LatLng(Global.lattitude, Global.longitude);
         mMap.addMarker(new MarkerOptions().position(kerala).title("Your Bus"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(kerala));
+        float zoomLevel = 12.0f; //This goes up to 21
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kerala, zoomLevel));
+
+
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             public void run() {
