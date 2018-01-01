@@ -44,8 +44,8 @@ public void findLoc(){
 
                 Global.lattitude = Double.valueOf(response.getString("lattitude"));
                 Global.longitude = Double.valueOf(response.getString("longitude"));
-
-                Toast.makeText(mContext,"Clicked ProductID = " + Global.busnum,Toast.LENGTH_LONG).show();
+                Global.status = Integer.parseInt(response.getString("available"));
+                Toast.makeText(mContext,"Bus No " + Global.busnum,Toast.LENGTH_LONG).show();
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -54,8 +54,7 @@ public void findLoc(){
         }}, new Response.ErrorListener() {
         @Override
         public void onErrorResponse(VolleyError error) {
-            Toast.makeText(mContext,"ERROR",Toast.LENGTH_SHORT).show();
-
+            Toast.makeText(mContext,"Couldn't connect",Toast.LENGTH_SHORT).show();
         }
     }){ @Override
     protected Map<String, String> getParams() throws AuthFailureError {
