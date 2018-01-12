@@ -27,7 +27,7 @@ public class SignUp extends AppCompatActivity {
     EditText Username;
     Button signup;
 
-    String server_url = "http://192.168.43.230/adduser.php";
+    String server_url = "https://samplewebsiteone.000webhostapp.com/adduser.php";
 
     AlertDialog.Builder builder;
     String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
@@ -68,60 +68,65 @@ public class SignUp extends AppCompatActivity {
 
                 Matcher matcher = pattern.matcher(email);
 
-                if(!matcher.matches()){
+                if(name.matches("") || password.matches("") || username.matches("") || studid.matches("")){
+                    Toast.makeText(SignUp.this,"No fields can be empty",Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    if (!matcher.matches()) {
 
-                    Toast.makeText(SignUp.this,"Enter valid email id",Toast.LENGTH_SHORT).show();
-                }else {
-
-
-                    StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
-                        @Override
-                        public void onResponse(String response) {
-
-                            builder.setTitle("Server Response");
-                            builder.setMessage("Response :" + response);
-
-                            builder.setPositiveButton("OK ", new DialogInterface.OnClickListener() {
-                                @Override
-                                public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(SignUp.this, "Enter valid email id", Toast.LENGTH_SHORT).show();
+                    } else {
 
 
-                                }
-                            });
+                        StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+
+                                builder.setTitle("Server Response");
+                                builder.setMessage("Response :" + response);
+
+                                builder.setPositiveButton("OK ", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
 
 
-                            AlertDialog alertDialog = builder.create();
-
-                            alertDialog.show();
-
-                        }
-                    }, new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-
-                            Toast.makeText(SignUp.this, "Error...", Toast.LENGTH_SHORT).show();
-                            error.printStackTrace();
-
-                        }
-                    }) {
-
-                        @Override
-                        protected Map<String, String> getParams() throws AuthFailureError {
-                            Map<String, String> params = new HashMap<>();
-
-                            params.put("studid", studid);
-                            params.put("name", name);
-                            params.put("username",username);
-                            params.put("email", email);
-                            params.put("passwd", password);
-
-                            return params;
-                        }
-                    };
+                                    }
+                                });
 
 
-                    Mysingleton.getmInstance(SignUp.this).addToRequestque(stringRequest);
+                                AlertDialog alertDialog = builder.create();
 
+                                alertDialog.show();
+
+                            }
+                        }, new Response.ErrorListener() {
+                            @Override
+                            public void onErrorResponse(VolleyError error) {
+
+                                Toast.makeText(SignUp.this, "Error...", Toast.LENGTH_SHORT).show();
+                                error.printStackTrace();
+
+                            }
+                        }) {
+
+                            @Override
+                            protected Map<String, String> getParams() throws AuthFailureError {
+                                Map<String, String> params = new HashMap<>();
+
+                                params.put("studid", studid);
+                                params.put("name", name);
+                                params.put("username", username);
+                                params.put("email", email);
+                                params.put("passwd", password);
+
+                                return params;
+                            }
+                        };
+
+
+                        Mysingleton.getmInstance(SignUp.this).addToRequestque(stringRequest);
+
+                    }
                 }
             }
 

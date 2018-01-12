@@ -1,6 +1,9 @@
 package com.example.vishnu.findmybus;
 
+import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -21,7 +24,9 @@ import java.util.Map;
 public class FindfromView {
 
     private Context mContext;
-    private String json_url ="http://192.168.43.230/getLatLon.php";
+    private String json_url ="https://samplewebsiteone.000webhostapp.com/getLatLon.php";
+    AlertDialog.Builder builder;
+
 
 
     public FindfromView(Context mContext) {
@@ -52,9 +57,27 @@ public void findLoc(){
             }
 
         }}, new Response.ErrorListener() {
+
         @Override
         public void onErrorResponse(VolleyError error) {
-            Toast.makeText(mContext,"Couldn't connect",Toast.LENGTH_SHORT).show();
+            builder = new AlertDialog.Builder(mContext);
+
+
+            builder.setTitle("Oops");
+            builder.setMessage("Couldn't connect...make sure data is on and restart app");
+
+            builder.setPositiveButton("OK ", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+
+                }
+            });
+
+
+            AlertDialog alertDialog = builder.create();
+
+            alertDialog.show();
         }
     }){ @Override
     protected Map<String, String> getParams() throws AuthFailureError {

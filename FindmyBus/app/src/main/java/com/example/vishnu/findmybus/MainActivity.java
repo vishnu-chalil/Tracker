@@ -14,11 +14,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Handler;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -43,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
     TextView signup;
     Button login;
 
-    String server_url = "http://192.168.43.230/serve.php";
+    String server_url = "https://samplewebsiteone.000webhostapp.com/serve.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,10 +69,12 @@ public class MainActivity extends AppCompatActivity {
         signup =  findViewById(R.id.signup);
         login =  findViewById(R.id.login);
 
-
+        final View view = findViewById(android.R.id.content);
+        
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 final String password,email;
 
@@ -103,8 +107,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
 
-                        Toast.makeText(MainActivity.this,"Error occured",Toast.LENGTH_SHORT).show();
-
+                        //Toast.makeText(MainActivity.this,"Error occured",Toast.LENGTH_SHORT).show();
+                        Snackbar
+                                .make(view, "No network connection.",Snackbar.LENGTH_LONG)
+                                .show();
 
                     }
                 }) {

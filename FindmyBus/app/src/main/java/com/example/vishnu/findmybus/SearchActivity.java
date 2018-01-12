@@ -11,10 +11,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 public class SearchActivity extends AppCompatActivity {
     EditText Busnumber;
+    TextView tv;
     public boolean find;
     public int i;
     @Override
@@ -22,9 +24,23 @@ public class SearchActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
         Busnumber = findViewById(R.id.NUM);
-
+        tv = findViewById(R.id.sign_out);
         GetBusNos getBusNos = new GetBusNos(SearchActivity.this);
         getBusNos.getBusnos();
+
+
+        tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                SharedPreferences preferences = getSharedPreferences("PREFS", MODE_PRIVATE);
+                final SharedPreferences.Editor editor = preferences.edit();
+                editor.remove("email");
+                editor.apply();
+                Intent started = new Intent(SearchActivity.this, MainActivity.class);
+                SearchActivity.this.startActivity(started);
+            }
+        });
     }
 
         public void getList(View view) {
@@ -32,6 +48,9 @@ public class SearchActivity extends AppCompatActivity {
         SearchActivity.this.startActivity(started);
 
     }
+
+
+
     public void Find(View view) {
         Global.busnum = Busnumber.getText().toString();
         if (Global.busnum.matches("")) {

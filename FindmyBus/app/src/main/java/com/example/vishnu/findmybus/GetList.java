@@ -23,7 +23,7 @@ import java.util.List;
 
 public class GetList extends AppCompatActivity {
 
-    String json_url="http://192.168.43.230/sendbuslist.php";
+    String json_url="https://samplewebsiteone.000webhostapp.com/sendbuslist.php";
     ProgressDialog progressDialog;
     private ListView  Ivproduct;
     private ProductListAdapter adapter;

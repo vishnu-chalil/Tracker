@@ -1,6 +1,8 @@
 package com.example.vishnu.findmybus;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -17,8 +19,10 @@ import java.lang.reflect.Array;
  */
 
 public class GetBusNos {
-    private String json_url ="http://192.168.43.230/Getbusnos.php";
+    private String json_url ="https://samplewebsiteone.000webhostapp.com/Getbusnos.php";
     private Context context;
+    AlertDialog.Builder builder;
+
 
     public GetBusNos(Context context) {
         this.context = context;
@@ -53,8 +57,24 @@ public class GetBusNos {
             @Override
             public void onErrorResponse(VolleyError error) {
 
-                Toast.makeText(context, "Error...", Toast.LENGTH_SHORT).show();
+                builder = new AlertDialog.Builder(context);
 
+
+                builder.setTitle("Oops");
+                builder.setMessage("Couldn't connect...make sure data is on and restart app");
+
+                builder.setPositiveButton("OK ", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+
+                    }
+                });
+
+
+                AlertDialog alertDialog = builder.create();
+
+                alertDialog.show();
             }
         });
         Mysingleton.getmInstance(context).addToRequestque(jsonArrayRequest);
