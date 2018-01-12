@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">FindmyBus</string>
+    <string name="title_activity_track">Map</string>
+    <string name="Password">PASSWORD</string>
+    <string name="Email">EMAIL</string>
+    <string name="add_acnt">DON\'T HAVE AN ACCOUNT ?</string>
+    <string name="sign_up_btn">SIGN UP</string>
+</resources>
