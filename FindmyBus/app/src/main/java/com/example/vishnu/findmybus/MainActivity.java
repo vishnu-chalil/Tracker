@@ -137,10 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-                stringRequest.setRetryPolicy(new DefaultRetryPolicy(
-                        0,
-                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+
                 Mysingleton.getmInstance(MainActivity.this).addToRequestque(stringRequest);
 
             }

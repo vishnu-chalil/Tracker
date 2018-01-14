@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AlertDialog;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -25,19 +26,16 @@ import java.util.Map;
 public class FindfromView {
 
     private Context mContext;
-    private String json_url ="https://samplewebsiteone.000webhostapp.com/getLatLon.php";
+    private String json_url;
     AlertDialog.Builder builder;
+    View view;
 
-
-
-    public FindfromView(Context mContext) {
-
-
+    public FindfromView(Context mContext, String json_url) {
         this.mContext = mContext;
+        this.json_url = json_url;
     }
 
-
-public void findLoc(){
+    public void findLoc(){
 
 
     CustomRequest jso = new CustomRequest(Request.Method.POST, json_url,  null, new Response.Listener<JSONObject>() {

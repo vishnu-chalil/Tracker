@@ -13,7 +13,6 @@ public class Global {
     public static Double lattitude;
     public static Double longitude;;
 
-
     public static List<Integer> bus_nos = new ArrayList<Integer>();
     public static int status = 0;
 }

@@ -24,10 +24,10 @@ import java.util.List;
 public class GetList extends AppCompatActivity {
 
     String json_url="https://samplewebsiteone.000webhostapp.com/sendbuslist.php";
-    ProgressDialog progressDialog;
     private ListView  Ivproduct;
     private ProductListAdapter adapter;
     private List<Product> mProductList;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,11 +38,6 @@ public class GetList extends AppCompatActivity {
 
 
 
-        progressDialog = new ProgressDialog(GetList.this);
-        progressDialog.setTitle("Loading");
-        progressDialog.setMessage("Please wait");
-        progressDialog.show();
-        progressDialog.setCancelable(false);
 
 
 
@@ -61,8 +56,6 @@ public class GetList extends AppCompatActivity {
                         int a = Integer.parseInt(jsonObject.getString("bus_no"));
                         String point1 = jsonObject.getString("point1");
                         String point2 = jsonObject.getString("point2");
-                        Double b = Double.valueOf(jsonObject.getString("lattitude"));
-                        Double c = Double.valueOf(jsonObject.getString("longitude"));
                         mProductList.add(new Product(a, a + "", point1, point2));
 
                      count++;
@@ -82,7 +75,7 @@ public class GetList extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Global.busnum = String.valueOf(view.getTag());
-                        FindfromView findfromView = new FindfromView(GetList.this);
+                        FindfromView findfromView = new FindfromView(GetList.this,SearchActivity.json_url1);
                         findfromView.findLoc();
 
 
@@ -101,16 +94,6 @@ public class GetList extends AppCompatActivity {
             }
         })  ;
         Mysingleton.getmInstance(GetList.this).addToRequestque(jsonArrayRequest);
-
-
-
-
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
-                progressDialog.dismiss();
-            }
-        }, 1000); // 3000 milliseconds delay
 
 
     }
