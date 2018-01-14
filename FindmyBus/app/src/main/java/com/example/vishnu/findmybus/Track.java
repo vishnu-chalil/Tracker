@@ -2,6 +2,7 @@ package com.example.vishnu.findmybus;
 
 import android.app.ProgressDialog;
 import android.os.Handler;
+import android.provider.Settings;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -55,11 +56,9 @@ public class Track extends FragmentActivity implements OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(kerala, zoomLevel));
 
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            public void run() {
+         Handler handler = new Handler();
+
                 progressDialog.dismiss();
-            }
-        }, 2000); // 3000 milliseconds delay
+
     }
 }

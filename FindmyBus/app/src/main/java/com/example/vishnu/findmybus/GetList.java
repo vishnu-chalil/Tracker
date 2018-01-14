@@ -84,8 +84,8 @@ public class GetList extends AppCompatActivity {
                         Global.busnum = String.valueOf(view.getTag());
                         FindfromView findfromView = new FindfromView(GetList.this);
                         findfromView.findLoc();
-                        Intent intent = new Intent(GetList.this, Track.class);
-                        GetList.this.startActivity(intent);
+
+
 
                     }
                 });

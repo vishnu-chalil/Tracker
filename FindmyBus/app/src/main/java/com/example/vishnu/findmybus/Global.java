@@ -10,10 +10,10 @@ import java.util.List;
 public class Global {
     public static String tabname;
     public static String busnum;
-    public static Double lattitude = Double.valueOf(10);
-    public static Double longitude = Double.valueOf(10);
-    public static int status;
+    public static Double lattitude;
+    public static Double longitude;;
 
 
     public static List<Integer> bus_nos = new ArrayList<Integer>();
+    public static int status = 0;
 }

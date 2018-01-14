@@ -4,6 +4,7 @@ package com.example.vishnu.findmybus;
  * Created by vishnu on 25/12/17.
  */
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -56,7 +57,6 @@ public class Mysingleton {
     }
 
     public<T> void addToRequestque(Request<T> request){
-
         requestQueue.add(request);
     }
 }

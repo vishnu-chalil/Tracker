@@ -3,6 +3,7 @@ package com.example.vishnu.findmybus;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 
@@ -49,11 +50,16 @@ public void findLoc(){
 
                 Global.lattitude = Double.valueOf(response.getString("lattitude"));
                 Global.longitude = Double.valueOf(response.getString("longitude"));
-                Global.status = Integer.parseInt(response.getString("available"));
-                Toast.makeText(mContext,"Bus No " + Global.busnum,Toast.LENGTH_LONG).show();
+                Global.status = Integer.parseInt(response.getString("status"));
+
+                Intent intent = new Intent(mContext, Track.class);
+                mContext.startActivity(intent);
+
+                Toast.makeText(mContext,"Bus No " + Global.busnum + "  " + Global.status,Toast.LENGTH_LONG).show();
 
             } catch (JSONException e) {
                 e.printStackTrace();
+
             }
 
         }}, new Response.ErrorListener() {

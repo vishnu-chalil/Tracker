@@ -2,6 +2,7 @@ package com.example.vishnu.findmybus;
 
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -136,7 +137,10 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-
+                stringRequest.setRetryPolicy(new DefaultRetryPolicy(
+                        0,
+                        DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                        DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
                 Mysingleton.getmInstance(MainActivity.this).addToRequestque(stringRequest);
 
             }

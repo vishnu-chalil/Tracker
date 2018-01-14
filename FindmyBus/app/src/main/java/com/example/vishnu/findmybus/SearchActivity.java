@@ -56,7 +56,8 @@ public class SearchActivity extends AppCompatActivity {
         if (Global.busnum.matches("")) {
             Toast.makeText(SearchActivity.this,"Enter a Bus number",Toast.LENGTH_SHORT).show();
         }
-        else {i = 0;
+        else {
+            i = 0;
             while (i < Global.bus_nos.size()) {
                 if (Integer.valueOf(Global.busnum) == Global.bus_nos.get(i)) {
                     find = true;
@@ -67,14 +68,14 @@ public class SearchActivity extends AppCompatActivity {
                 i++;
             }
 
-            if (find) {
-                FindfromView findfromView = new FindfromView(SearchActivity.this);
-                findfromView.findLoc();
-                Intent intent = new Intent(SearchActivity.this, Track.class);
-                SearchActivity.this.startActivity(intent);
-            } else {
-                Toast.makeText(SearchActivity.this,"Bus Not Available Today", Toast.LENGTH_SHORT).show();
-            }
+                if (find) {
+                    FindfromView findfromView = new FindfromView(SearchActivity.this);
+                    findfromView.findLoc();
+
+                } else {
+                    Toast.makeText(SearchActivity.this, "Bus Not Available Today", Toast.LENGTH_SHORT).show();
+                }
+
 
         }
 

@@ -2,6 +2,8 @@ package com.example.vishnu.findmybus;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -13,6 +15,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.lang.reflect.Array;
+
+import static android.support.v4.app.ActivityCompat.finishAffinity;
 
 /**
  * Created by vishnu on 1/1/18.
@@ -67,6 +71,10 @@ public class GetBusNos {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
+                       /* Intent homeIntent = new Intent(Intent.ACTION_MAIN);
+                        homeIntent.addCategory( Intent.CATEGORY_HOME );
+                        homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        context.startActivity(homeIntent);*/
 
                     }
                 });
