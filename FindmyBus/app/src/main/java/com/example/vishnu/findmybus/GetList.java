@@ -27,6 +27,7 @@ public class GetList extends AppCompatActivity {
     private ListView  Ivproduct;
     private ProductListAdapter adapter;
     private List<Product> mProductList;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -35,7 +36,12 @@ public class GetList extends AppCompatActivity {
         setContentView(R.layout.activity_get_list);
         Ivproduct = findViewById(R.id.mainview);
         mProductList = new ArrayList<>();
+        progressDialog = new ProgressDialog(GetList.this);
 
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Please wait");
+        progressDialog.show();
+        progressDialog.setCancelable(true);
 
 
 
@@ -44,7 +50,6 @@ public class GetList extends AppCompatActivity {
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.POST, json_url, null, new Response.Listener<JSONArray>() {
             @Override
             public void onResponse(JSONArray response) {
-                Toast.makeText(GetList.this, "Working", Toast.LENGTH_SHORT).show();
                 int count = 0;
 
                 while (count < response.length()) {
@@ -68,6 +73,8 @@ public class GetList extends AppCompatActivity {
 
                 }
 
+                progressDialog.dismiss();
+
 
                 adapter = new ProductListAdapter(getApplicationContext(),mProductList);
                 Ivproduct.setAdapter(adapter);
@@ -88,8 +95,10 @@ public class GetList extends AppCompatActivity {
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
 
-                Toast.makeText(GetList.this, "Error...", Toast.LENGTH_SHORT).show();
+
+                Toast.makeText(GetList.this, "Check connectivity and try again", Toast.LENGTH_SHORT).show();
 
             }
         })  ;

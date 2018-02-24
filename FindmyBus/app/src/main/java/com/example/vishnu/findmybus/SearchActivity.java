@@ -1,5 +1,6 @@
 package com.example.vishnu.findmybus;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
@@ -17,15 +18,19 @@ import android.widget.Toast;
 public class SearchActivity extends AppCompatActivity {
     EditText Busnumber;
     TextView tv;
+    ProgressDialog progressDialog;
+
     public static String json_url1 ="https://samplewebsiteone.000webhostapp.com/getLatLon.php";
     String json_url2 ="https://samplewebsiteone.000webhostapp.com/Getbusnos.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        progressDialog = new ProgressDialog(SearchActivity.this);
         Busnumber = findViewById(R.id.NUM);
         tv = findViewById(R.id.sign_out);
         final  View view = findViewById(android.R.id.content);
+
 
 
         tv.setOnClickListener(new View.OnClickListener() {
@@ -50,15 +55,21 @@ public class SearchActivity extends AppCompatActivity {
 
 
     public void Find(View view) {
+
         Global.busnum = Busnumber.getText().toString();
 
         if (Global.busnum.matches("")) {
+
             Toast.makeText(SearchActivity.this,"Enter a Bus number",Toast.LENGTH_SHORT).show();
         }
         else {
+
           GetIndividual getIndividual = new GetIndividual(SearchActivity.this, json_url2,view);
           getIndividual.findLoc();
+
+
         }
+
     }
 
     private boolean doubleBackToExitPressedOnce;

@@ -1,5 +1,6 @@
 package com.example.vishnu.findmybus;
 
+import android.app.ProgressDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.content.DialogInterface;
@@ -26,6 +27,8 @@ public class SignUp extends AppCompatActivity {
     EditText StudentID;
     EditText Username;
     Button signup;
+    ProgressDialog progressDialog;
+
 
     String server_url = "https://samplewebsiteone.000webhostapp.com/adduser.php";
 
@@ -40,6 +43,8 @@ public class SignUp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
+        progressDialog = new ProgressDialog(SignUp.this);
+
 
         Name =  findViewById(R.id.textView4);
         Email =  findViewById(R.id.textView5);
@@ -53,6 +58,7 @@ public class SignUp extends AppCompatActivity {
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
 
                 final String name,email,password,studid,username;
 
@@ -77,11 +83,15 @@ public class SignUp extends AppCompatActivity {
                         Toast.makeText(SignUp.this, "Enter valid email id", Toast.LENGTH_SHORT).show();
                     } else {
 
+                        progressDialog.setTitle("Loading");
+                        progressDialog.setMessage("Please wait");
+                        progressDialog.show();
+                        progressDialog.setCancelable(false);
 
                         StringRequest stringRequest = new StringRequest(Request.Method.POST, server_url, new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-
+                                progressDialog.dismiss();
                                 builder.setTitle("Server Response");
                                 builder.setMessage("Response :" + response);
 
@@ -102,9 +112,10 @@ public class SignUp extends AppCompatActivity {
                         }, new Response.ErrorListener() {
                             @Override
                             public void onErrorResponse(VolleyError error) {
-
+                                progressDialog.dismiss();
                                 Toast.makeText(SignUp.this, "Error...", Toast.LENGTH_SHORT).show();
                                 error.printStackTrace();
+
 
                             }
                         }) {

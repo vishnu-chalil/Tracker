@@ -1,6 +1,7 @@
 package com.example.vishnu.findmybus;
 
 import android.app.Dialog;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -29,6 +30,8 @@ public class FindfromView {
     private String json_url;
     AlertDialog.Builder builder;
     View view;
+    private ProgressDialog progressDialog;
+
 
     public FindfromView(Context mContext, String json_url) {
         this.mContext = mContext;
@@ -37,12 +40,18 @@ public class FindfromView {
 
     public void findLoc(){
 
+        progressDialog = new ProgressDialog(mContext);
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Please wait");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
 
     CustomRequest jso = new CustomRequest(Request.Method.POST, json_url,  null, new Response.Listener<JSONObject>() {
         @Override
         public void onResponse(JSONObject response) {
+            progressDialog.dismiss();
 
-            JSONObject jsonObject = null;
+            //JSONObject jsonObject = null;
             try {
 
 
@@ -56,6 +65,8 @@ public class FindfromView {
                 Toast.makeText(mContext,"Bus No " + Global.busnum + "  " + Global.status,Toast.LENGTH_LONG).show();
 
             } catch (JSONException e) {
+                progressDialog.dismiss();
+
                 e.printStackTrace();
 
             }
@@ -64,6 +75,7 @@ public class FindfromView {
 
         @Override
         public void onErrorResponse(VolleyError error) {
+            progressDialog.dismiss();
             builder = new AlertDialog.Builder(mContext);
 
 

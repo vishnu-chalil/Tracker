@@ -1,5 +1,6 @@
 package com.example.vishnu.findmybus;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -27,6 +28,8 @@ public class GetIndividual {
 
     private Context mContext;
     private String json_url;
+    ProgressDialog progressDialog;
+
     View view;
 
     public GetIndividual(Context mContext, String json_url, View view) {
@@ -37,10 +40,16 @@ public class GetIndividual {
 
     public void findLoc(){
 
+        progressDialog = new ProgressDialog(mContext);
 
+        progressDialog.setTitle("Loading");
+        progressDialog.setMessage("Please wait");
+        progressDialog.show();
+        progressDialog.setCancelable(false);
         CustomRequest jso = new CustomRequest(Request.Method.POST, json_url,  null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                progressDialog.dismiss();
 
                 JSONObject jsonObject = null;
                 try {
@@ -60,6 +69,8 @@ public class GetIndividual {
 
 
                 } catch (JSONException e) {
+                    progressDialog.dismiss();
+
                     e.printStackTrace();
 
                 }
@@ -68,6 +79,7 @@ public class GetIndividual {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                progressDialog.dismiss();
                 Snackbar
                         .make(view, "No network connection.",Snackbar.LENGTH_LONG)
                         .show();
