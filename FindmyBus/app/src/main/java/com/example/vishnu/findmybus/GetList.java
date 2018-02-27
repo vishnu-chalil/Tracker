@@ -82,7 +82,7 @@ public class GetList extends AppCompatActivity {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Global.busnum = String.valueOf(view.getTag());
-                        FindfromView findfromView = new FindfromView(GetList.this,SearchActivity.json_url1);
+                        FindfromView findfromView = new FindfromView(GetList.this,Search.json_url1);
                         findfromView.findLoc();
 
 

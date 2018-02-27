@@ -12,11 +12,11 @@ android {
     }
     buildTypes {
         debug {
-            manifestPlaceholders = [ mapApiKeyValue:"AIzaSyA73VkT2cX453JuizSGz_FGixjz68ocef4"]
+            manifestPlaceholders = [mapApiKeyValue: "AIzaSyA73VkT2cX453JuizSGz_FGixjz68ocef4"]
         }
 
         release {
-            manifestPlaceholders = [ mapApiKeyValue:"AIzaSyA73VkT2cX453JuizSGz_FGixjz68ocef4"]
+            manifestPlaceholders = [mapApiKeyValue: "AIzaSyA73VkT2cX453JuizSGz_FGixjz68ocef4"]
         }
     }
 }

@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
         final SharedPreferences.Editor editor = preferences.edit();
         String ispass = preferences.getString("email","" );
        if(ispass.length() >5  ){
-            Intent started = new Intent(MainActivity.this,SearchActivity.class);
+            Intent started = new Intent(MainActivity.this,Search.class);
             MainActivity.this.startActivity(started);
         }
 
@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
                             editor.putString("password", password);
                             editor.putBoolean("key",true);
                             editor.commit();
-                            Intent started = new Intent(MainActivity.this,SearchActivity.class);
+                            Intent started = new Intent(MainActivity.this,Search.class);
                             Global.tabname = email;
                             MainActivity.this.startActivity(started);
                         }
